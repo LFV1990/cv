@@ -5,35 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help</title>
-<!-- 
+    <!-- trata-se de um style muito básico que viso localizar o input (file) dentro da caixa de texto -->
     <style>
-        body{
-
-            text-align: center;
-
-            background-color: #ECE5C7;
+        .file{
+            position: relative;
+            bottom: 20px;
+            right: 380px;
         }
-
-        .border{
-
-            border: 0px;
-        }
-
-    </style> -->
+    </style>
 </head>
 <body>
-    <h1>Envie-nos um email</h1>
-    <p>A nossa equipa entrará em contacto o mais breve possível.</p>
+    <!-- Trata-se de um email de exposição de uma eventual dificuldade do utilizador -->
+    <h1 style="text-align: center;">Envie-nos um email</h1>
+    <p style="text-align: center;">A nossa equipa entrará em contacto o mais breve possível.</p>
+    <!-- Com este form, objetivei utilizar todos os conteúdos aprendidos até ao momento. -->
     <form action="https://formsubmit.co/luis.filipevieira@hotmail.com" method="post" target="_blank" oninput="x.value=paísContacto.value">
-
+        <label for="">Nome:</label>
+        <!-- campo colocado com obrigatório, tentei colocar um regex para aceitar apenas primeiro e último nome (dois nomes) -->
         <input class="border" type="text" name="primeiroUltimoNome" id="primeiroUltimoNome" placeholder="Primeiro e último nome*" required >
         <hr>
-        <label for="dataContacto">Data prefencial para contacto</label><br>
+        <!-- Aqui questiono o utilizador para uma data preferencial de contacto. Coloquei a validação de tempo, para só permitir solicitações durante a próxima semana -->
+        <label for="dataContacto">Data para contacto:</label>
         <input id="dataContacto" type="datetime-local" name="dataContacto" min="2022-05-30T08:30" max="2022-06-04T16:30"  ondrag="O que faço">  
         <hr>
-        <label for="">Telemóvel</label><br>
-        <select name="paísContacto" id="paísContacto">
-            <option value="">Selecione o país</option>
+        <label for="">Telemóvel</label>:
+        <!-- Com este select, quis trazer as opções de indicativo para reduzir a margem de erro. Certamento, seria mais facil ter os dados numa BD em vez de colocar no código-->
+        <select name="paísContacto" id="paísContacto" required>
+            <option value="">Selecione o país*</option>
+            <option value="+351" >Portugal</option>
             <option value="+1907">Alasca</option>
             <option value="+355">Albânia</option>
             <option value="+49">Alemanha</option>
@@ -170,7 +169,6 @@
             <option value="+689">Polinésia Francesa</option>
             <option value="+48">Polónia</option>
             <option value="+1809">Porto Rico</option>
-            <option value="+351" >Portugal</option>
             <option value="+974">Qatar</option>
             <option value="+254">Quénia</option>
             <option value="+44">Reino Unido</option>
@@ -222,22 +220,23 @@
             <option value="+1809">Zona Caraíbas</option>
             <option value="+967">Yemen R. A.</option>
         </select>
+        <!-- O próximo output, apresentará o indicativo do país selecionado -->
         <output id="x" name="x" for="paísContacto"></output>
-        <input type="tel">
+        <input type="tel" placeholder="Número*" required >
         <hr>
-        <label for="">Email para contacto</label>
-        <input type="email" name="email" id="emailResposta" pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g">
+        <!-- Solicitação do email para resposta. Utilizei uma regex identificada na aula -->
+        <label for="">Email:</label>
+        <input type="email" name="email" id="emailResposta" placeholder="Email para resposta*" required pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g">
         <hr>
-        <textarea name="Mensagem" id="Mensagem" cols="50" rows="20" placeholder="Reporte a dificuldade sentida..." maxlength="900"></textarea>
-        <input type="file" name="erro" id="erro">
-        
-
-
+        <textarea name="Mensagem" id="Mensagem" cols="50" rows="20" placeholder="Reporte a dificuldade sentida...*" maxlength="900"></textarea>
+        <!-- Quis permitir que o utilizador anexasse uma evidência do erro -->
+        <input class="file" type="file" name="erro" id="erro">
         <hr>
+        <p>* Dados obrigatórios ao pedido de esclarecimento</p>
+        <!-- Só consegue avançar com a solicitação, se der o consentimento ao tratamento dos dados -->
+        Aceito o tratamento dos dados recolhidos <input type="checkbox" required>
         <input type="submit" value="Reportar dificuldade">
         <input type="reset" value="Limpar dados">
-
-    </form>
-    
+    </form> 
 </body>
 </html>
